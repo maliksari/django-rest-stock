@@ -1,6 +1,5 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
@@ -31,13 +30,13 @@ class StockList(APIView):
 
 
 class StockDetail(APIView):
-    def get(self, request, pk, format=None):
+    def get(self, request, pk):
         queryset = get_object_or_404(Stock.objects.all(), pk=pk)
         serializer = StockSerializer(queryset)
 
         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
+    def put(self, request, pk):
         queryset = get_object_or_404(Stock.objects.all(), pk=pk)
         serializer = StockSerializer(queryset, data=request.data)
         if serializer.is_valid():
@@ -45,7 +44,7 @@ class StockDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
+    def delete(self, request, pk):
         queryset = get_object_or_404(Stock.objects.all(), pk=pk)
         queryset.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

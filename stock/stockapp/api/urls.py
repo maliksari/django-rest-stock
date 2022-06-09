@@ -5,9 +5,10 @@ from .views import StockList, StockDetail
 
 # router = routers.DefaultRouter()
 # router.register(r'api', StockViews)
+app_name = 'stock-api'
 
 urlpatterns = [
     # path('', include(router.urls)),
-    path('', StockList.as_view()),
-    path('<pk>/', StockDetail.as_view()),
+    path('api/', StockList.as_view(), name='stock-list'),
+    path('api/<pk>/', StockDetail.as_view(), name="stock-detail"),
 ]

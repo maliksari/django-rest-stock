@@ -10,7 +10,7 @@ class Stock(models.Model):
     updated_at = models.DateTimeField(
         null=True, blank=True)
     deleted_at = models.DateTimeField(blank=True, null=True, default=None)
-    is_deleted = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False, blank=True, null=True)
 
     def __str__(self):
         return self.name
